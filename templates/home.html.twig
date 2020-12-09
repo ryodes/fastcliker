@@ -1,0 +1,99 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <style>
+        .row{
+            justify-content: center;
+        }
+
+        #clique{
+            background-color: #595959;
+            height:176px; 
+            width:-webkit-fill-available
+        }
+
+        #reset{
+            background-color: #141414;
+        }
+
+        button{
+            margin: 5px;
+        }
+
+        h3{
+            font-size: 40px;
+            text-align: center;
+        }
+
+        #clics{
+            font-size: 20px;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <h1> {{title}} </h1>
+
+    <div class="row" style="justify-content: center;">
+        <p id="clics">Clics: <span id="nbclique"></span>🖱️</p>
+    </div>
+    <div class="row">
+        <button id="reset" class="btn btn.secondary">reset 🔄</button>
+    </div>
+    <div class="row">
+        <button id="clique" class="btn primary">CLIQUE</button>
+    </div>
+
+    <h3><span id="time"></span>⏱️</h3>
+    <hr>
+
+    <P>[Application] Dec  4 09:51:30 |INFO   | REQUES Matched route "_wdt". method="GET" request_uri="http://127.0.0.1:8000/_wdt/496
+    770" route="_wdt" route_parameters={"_controller":"web_profiler.controller.profiler::toolbarAction","_route":"_wdt","token":"496770"}
+    [Application] Dec  4 09:51:30 |DEBUG  | PHP    User Warning: Configure the "curl.cainfo", "openssl.cafile" or "openssl.capath" php.ini setting to
+    enable the CurlHttpClient
+    [Application] Dec  4 09:51:30 |DEBUG  | PHP    User Notice: Upgrade the curl extension or run "composer require amphp/http-client" to perform asy
+    nc HTTP operations, including full HTTP/2 support
+    [Web Server ] Dec  4 10:51:30 |INFO   | SERVER GET  (200) /_wdt/496770 ip="127.0.0</P>
+
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript">
+        var time = 10
+        var stop = false;
+        var i = 0;
+        var display = true;
+        $("#time").text(time);
+        $("#nbclique").text(i);
+        $("#clique").click(function(){
+            if (time >= 0) {
+                $("#nbclique").text(++i);
+                if (time == 10){
+                    stop = false;
+                    decrementer();
+                }
+            }
+        });
+
+        $("#reset").click(function() {
+            $("#clique").css({'display': 'block'});
+            stop = true;
+            time = 10;
+            i = 0;
+            $("#nbclique").text(i);
+            $("#time").text(time);
+        });
+        
+        function decrementer() {
+            if ( time > 0 && !stop) {
+                $("#time").text(time);
+                time--;
+                setTimeout(decrementer, 1000);
+            } else {
+                $("#time").text(time);
+                time = -1
+                $("#clique").css({'display': 'none'});
+            }
+        }
+    </script>
+{% endblock %}
