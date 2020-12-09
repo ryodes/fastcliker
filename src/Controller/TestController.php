@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class TestController extends AbstractController
 {
     /**
-     * @Route("/test/article/32", name="test")
+     * @Route("/test", name="test")
      */
     public function index(): Response
     {
@@ -19,10 +19,10 @@ class TestController extends AbstractController
     }
 
     /**
-     * @Route("/click", name="click")
+     * @Route("/", name="click")
      */
     public function click() {
-        return $this->render('test/home.html.twig', [
+        return $this->render('home.html.twig', [
             'title' => "Bonjour bienvenue dans la page d'accueil !",
             'age' => 15,
         ]);
