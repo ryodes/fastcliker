@@ -1,0 +1,40 @@
+<script type="text/javascript">
+    var time = 10;
+    var stop = false;
+    var i = 0;
+    var display = true;
+    var reset = true;
+    $("#time").text(time);
+    $("#nbclique").text(i);
+    $("#clique").click(function(){
+        if (reset) {
+            $("#nbclique").text(++i);
+            if (time == 10){
+                stop = false;
+                decrementer();
+            }
+        }
+    });
+
+    $("#reset").click(function() {
+        $("#clique").css({'display': 'block'});
+        stop = true;
+        time = 10;
+        reset = true;
+        i = 0;
+        $("#nbclique").text(i);
+        $("#time").text(time);
+    });
+    
+    function decrementer() {
+        if ( time > 0 && !stop) {
+            $("#time").text(time);
+            time--;
+            setTimeout(decrementer, 1000);
+        } else if(time == 0) {
+            $("#time").text(time);
+            reset = false
+            $("#clique").css({'display': 'none'});
+        }
+    }
+</script>

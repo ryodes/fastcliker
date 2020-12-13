@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {% include "css.html.twig" %}
+{% endblock %}
+
+{% block body %}
+    <h1> {{title}} </h1>
+    <h3> {{title2}} </h3>
+
+    <div class="row" style="justify-content: center;">
+        <p id="clics">Clics: <span id="nbclique"></span>🖱️</p>
+    </div>
+    <div class="row">
+        <button id="reset" class="btn btn.secondary">reset 🔄</button>
+    </div>
+    <div class="row">
+        <button id="clique" class="btn primary">CLIQUE</button>
+    </div>
+
+    <h3><span id="time"></span>⏱️</h3>
+    <hr>
+
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad ipsum recusandae corporis enim saepe ipsam, veritatis quia esse consectetur explicabo tenetur obcaecati, quas at sint cum eligendi libero dicta! Illo!Totam dicta sint, voluptatem atque repellendus cumque. Assumenda deleniti soluta nihil vero vel laborum ut, impedit accusamus repudiandae error, velit ratione sapiente, expedita reprehenderit ipsam saepe earum aliquam sequi cum!</p>
+
+    <div class="row">
+        {{form(form)}}
+    </div>
+
+    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Maxime fugiat nisi neque, laudantium sint exercitationem recusandae magni voluptates officiis, dolore beatae rerum quam labore fuga pariatur explicabo quae numquam accusantium.Tenetur ab similique consequatur suscipit ducimus odio saepe, alias ut fugit ratione placeat harum quas molestias, aut vel nisi nobis quae, iure numquam veniam sint illum eaque. Inventore, perferendis accusantium.</p>
+{% endblock %}
+
+{% block javascripts %}
+    {% include "js.html.twig" %}    
+{% endblock javascripts %}
