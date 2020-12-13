@@ -24,7 +24,10 @@
     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad ipsum recusandae corporis enim saepe ipsam, veritatis quia esse consectetur explicabo tenetur obcaecati, quas at sint cum eligendi libero dicta! Illo!Totam dicta sint, voluptatem atque repellendus cumque. Assumenda deleniti soluta nihil vero vel laborum ut, impedit accusamus repudiandae error, velit ratione sapiente, expedita reprehenderit ipsam saepe earum aliquam sequi cum!</p>
 
     <div class="row">
-        {{form(form)}}
+        {{form_start(form)}}
+            {{form_row(form.name)}}
+            <button class="btn btn-primary" type="submit">Submit</button>
+        {{ form_end(form, {'render_rest': false}) }}
     </div>
 
     <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Maxime fugiat nisi neque, laudantium sint exercitationem recusandae magni voluptates officiis, dolore beatae rerum quam labore fuga pariatur explicabo quae numquam accusantium.Tenetur ab similique consequatur suscipit ducimus odio saepe, alias ut fugit ratione placeat harum quas molestias, aut vel nisi nobis quae, iure numquam veniam sint illum eaque. Inventore, perferendis accusantium.</p>

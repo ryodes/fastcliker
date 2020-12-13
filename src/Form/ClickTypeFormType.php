@@ -15,7 +15,7 @@ class ClickTypeFormType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, ['label' => 'Pseudo'])
-            ->add('Submit', SubmitType::class)
+            ->add('submit', SubmitType::class)
         ;
     }
 
