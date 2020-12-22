@@ -7,6 +7,31 @@
 {% block body %}
     <h1> {{title}} </h1>
     <h3> {{title2}} </h3>
+    
+    {% if users|length > 0 %}   
+        <div id="podium">
+            <div id="premier" class="row">
+                {% if users[0] is defined %}
+                    <p><span class="reward">🥇</span><br> {{users[0].name}} </p>
+                {% endif %}
+            </div>
+            <div class="row">
+                <div id="deuxième" class="col">
+                    {% if users[1] is defined %}
+                        <p> <span class="reward">🥈</span><br> {{users[1].name}} </p>
+                    {% endif %}    
+                </div>
+                <div id="troisième" class="col">
+                    {% if users[2] is defined %}
+                        <p><span class="reward">🥉</span><br> {{users[2].name}} </p>
+                    {% endif %}
+                </div>
+                <col>
+            </div>
+        </div>
+        {% else %}
+        <hr>
+    {% endif %}
 
     <div class="row" style="justify-content: center;">
         <p id="clics">Clics: <span id="nbclique"></span>🖱️</p>
@@ -25,9 +50,9 @@
 
     <div class="row">
         {{form_start(form)}}
-            {{form_row(form.name)}}
-            <button class="btn btn-primary" type="submit">Submit</button>
-        {{ form_end(form, {'render_rest': false}) }}
+            {{form_row(form._token)}}
+            {{form(form)}}
+        {{ form_end(form)}}
     </div>
 
     <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Maxime fugiat nisi neque, laudantium sint exercitationem recusandae magni voluptates officiis, dolore beatae rerum quam labore fuga pariatur explicabo quae numquam accusantium.Tenetur ab similique consequatur suscipit ducimus odio saepe, alias ut fugit ratione placeat harum quas molestias, aut vel nisi nobis quae, iure numquam veniam sint illum eaque. Inventore, perferendis accusantium.</p>

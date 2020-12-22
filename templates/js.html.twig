@@ -1,40 +1,53 @@
 <script type="text/javascript">
-    var time = 10;
-    var stop = false;
-    var i = 0;
-    var display = true;
-    var reset = true;
-    $("#time").text(time);
-    $("#nbclique").text(i);
-    $("#clique").click(function(){
-        if (reset) {
-            $("#nbclique").text(++i);
-            if (time == 10){
-                stop = false;
-                decrementer();
+    $(document).ready(function(){
+        var time = 10;
+        var stop = false;
+        var i = 0;
+        var display = true;
+        var reset = true;
+        $("#click_type_form_clics").val(i);
+        $("#time").text(time);
+        $("#nbclique").text(i);
+        $("#clique").click(function(){
+            if (reset) {
+                $("#nbclique").text(++i);
+                $("#click_type_form_clics").val(i);
+                if (time == 10){
+                    stop = false;
+                    decrementer();
+                }
+            }
+        });
+
+         
+        $("#reset").click(function() {
+            $("#clique").css({'display': 'block'});
+            stop = true;
+            time = 10;
+            reset = true;
+            i = 0;
+            $("#click_type_form_clics").val(0);
+            $("#nbclique").text(i);
+            $("#time").text(time);
+        });
+        
+        function decrementer() {
+            if ( time > 0 && !stop) {
+                $("#time").text(time);
+                time--;
+                setTimeout(decrementer, 1000);
+            } else if(time == 0) {
+                $("#time").text(time);
+                reset = false
+                $("#clique").css({'display': 'none'});
             }
         }
-    });
-
-    $("#reset").click(function() {
-        $("#clique").css({'display': 'block'});
-        stop = true;
-        time = 10;
-        reset = true;
-        i = 0;
-        $("#nbclique").text(i);
-        $("#time").text(time);
-    });
-    
-    function decrementer() {
-        if ( time > 0 && !stop) {
-            $("#time").text(time);
-            time--;
-            setTimeout(decrementer, 1000);
-        } else if(time == 0) {
-            $("#time").text(time);
-            reset = false
-            $("#clique").css({'display': 'none'});
-        }
-    }
+        $("#click_type_form_submit").on('click',function(){
+            $("form > div > input").val(i);
+            $("form > div div > button").css({'display': 'none'});
+        });
+        $("form > div > input").on('input',function(){
+            $("form > div > input").val(i);
+        });
+      });
 </script>

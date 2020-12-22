@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\ClickTypeFormType;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -25,20 +26,26 @@ class TestController extends AbstractController
     /**
      * @Route("/click", name="click")
      */
-    public function click(Request $request, EntityManagerInterface $em) {
+    public function click(Request $request, UserRepository $userRepository, EntityManagerInterface $em) {
         $user = new User();
 
         $form = $this->createForm(ClickTypeFormType::class,$user);
         $form->handleRequest($request);
 
+        $users = $userRepository->findByClicsOrdyByDESC();
+
         if ($form->isSubmitted() && $form->isValid()) {
-            dd($user);
+            $em->persist($user);
+            $em->flush();
+
+            return $this->redirectToRoute('click');
         }
 
         return $this->render('click/home.html.twig', [
             'title' => "Greeting and Welcome !",
             'title2' => "you wanna play a game ?",
             'form' => $form->createView(),
+            'users' => $users,
         ]);
     }
 }
