@@ -1,12 +1,8 @@
 {% extends 'base.html.twig' %}
 
-{% block stylesheets %}
-    {% include "css.html.twig" %}
-{% endblock %}
-
 {% block body %}
-    <h1> {{title}} </h1>
-    <h3> {{title2}} </h3>
+    <h1> Greeting and Welcome ! </h1>
+    <h3> You wanna play a game ? </h3>
     
     {% if users|length > 0 %}   
         <div id="podium">
@@ -46,8 +42,9 @@
     <h3><span id="time"></span>⏱️</h3>
     <hr>
 
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad ipsum recusandae corporis enim saepe ipsam, veritatis quia esse consectetur explicabo tenetur obcaecati, quas at sint cum eligendi libero dicta! Illo!Totam dicta sint, voluptatem atque repellendus cumque. Assumenda deleniti soluta nihil vero vel laborum ut, impedit accusamus repudiandae error, velit ratione sapiente, expedita reprehenderit ipsam saepe earum aliquam sequi cum!</p>
-
+    <div class="row" style="justify-content: center;">
+        <p>Entre ton pseudo pour impressionner tes amis.</p>
+    </div>
     <div class="row">
         {{form_start(form)}}
             {{form_row(form._token)}}
@@ -55,7 +52,30 @@
         {{ form_end(form)}}
     </div>
 
-    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Maxime fugiat nisi neque, laudantium sint exercitationem recusandae magni voluptates officiis, dolore beatae rerum quam labore fuga pariatur explicabo quae numquam accusantium.Tenetur ab similique consequatur suscipit ducimus odio saepe, alias ut fugit ratione placeat harum quas molestias, aut vel nisi nobis quae, iure numquam veniam sint illum eaque. Inventore, perferendis accusantium.</p>
+    <hr>
+
+    <div class="row" style="justify-content: center;">
+        <p>Voici le classement des 10 meilleurs joueurs !</p>
+    </div>
+
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Pseudo</th>
+            <th scope="col">Clis</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for i in 0..(users|length)-1 %}    
+                <tr>
+                    <th scope="row">{{i+1}}</th>
+                    <td>{{users[i].name}}</td>
+                    <td>{{users[i].clics}}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+      </table>
 {% endblock %}
 
 {% block javascripts %}

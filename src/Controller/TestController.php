@@ -19,7 +19,7 @@ class TestController extends AbstractController
     public function index(): Response
     {
         return $this->render('index.html.twig', [
-            'controller_name' => "Salut, je m'appel HAMED!",
+            'controller_name' => "Salut, je m'appel Ryodes!",
         ]);
     }
 
@@ -42,8 +42,6 @@ class TestController extends AbstractController
         }
 
         return $this->render('click/home.html.twig', [
-            'title' => "Greeting and Welcome !",
-            'title2' => "you wanna play a game ?",
             'form' => $form->createView(),
             'users' => $users,
         ]);
