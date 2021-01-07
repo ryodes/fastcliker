@@ -31,8 +31,8 @@ class TestController extends AbstractController
 
         $form = $this->createForm(ClickTypeFormType::class,$user);
         $form->handleRequest($request);
-
-        if (count($userRepository->findAll() > 11)) {
+        
+        if ((count($userRepository->findAll()) > 11)) {
             $delete = $userRepository->deleteMoreThan10();
             foreach ($delete as $i) {
                 $em->remove($i);
