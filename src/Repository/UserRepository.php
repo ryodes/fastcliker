@@ -33,7 +33,30 @@ class UserRepository extends ServiceEntityRepository
         );
 
         // returns an array of Product objects
-        return $query->getResult();
+        return $query->setMaxResults(10)
+                    ->getResult();
+    }
+
+    /**
+    * @return Product[]
+    */
+    public function deleteMoreThan10(): array
+    {
+        //SELECT * FROM `user`WHERE `id` NOT IN (SELECT * FROM (SELECT `id` FROM `user` ORDER BY `clics` DESC LIMIT 10) AS temp)
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT p
+            FROM App\Entity\User p
+            ORDER BY p.clics ASC'
+        );
+
+        $count = $entityManager->createQuery(
+            'SELECT COUNT(u) FROM App\Entity\User u'
+        )->getResult();
+
+        return $query->setMaxResults($count[0][1]-10)
+                    ->getResult();
     }
 
     // /**
