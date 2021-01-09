@@ -14,17 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class TestController extends AbstractController
 {
     /**
-     * @Route("/", name="index")
-     */
-    public function index(): Response
-    {
-        return $this->render('index.html.twig', [
-            'controller_name' => "Salut, je m'appelle Ryodes!",
-        ]);
-    }
-
-    /**
-     * @Route("/click", name="click")
+     * @Route("/", name="click")
      */
     public function click(Request $request, UserRepository $userRepository, EntityManagerInterface $em) {
         $user = new User();
@@ -52,6 +42,40 @@ class TestController extends AbstractController
         return $this->render('click/home.html.twig', [
             'form' => $form->createView(),
             'users' => $users,
+            'en' => False,
+        ]);
+    }
+
+    /**
+     * @Route("/en", name="clickEng")
+     */
+    public function clickEng(Request $request, UserRepository $userRepository, EntityManagerInterface $em) {
+        $user = new User();
+
+        $form = $this->createForm(ClickTypeFormType::class,$user);
+        $form->handleRequest($request);
+        
+        if ((count($userRepository->findAll()) > 11)) {
+            $delete = $userRepository->deleteMoreThan10();
+            foreach ($delete as $i) {
+                $em->remove($i);
+            }
+            $em->flush();
+        }
+        
+        $users = $userRepository->findByClicsOrdyByDESC();
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em->persist($user);
+            $em->flush();
+
+            return $this->redirectToRoute('clickEng');
+        }
+
+        return $this->render('click/home.html.twig', [
+            'form' => $form->createView(),
+            'users' => $users,
+            'en' => True,
         ]);
     }
 }

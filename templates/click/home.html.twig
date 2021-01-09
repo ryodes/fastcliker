@@ -1,8 +1,33 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1> Greeting and Welcome ! </h1>
-    <h3> You wanna play a game ? </h3>
+    <div class="row">
+        <div class="col-2">
+            {% if en %}
+                <h3>language :</h3>
+            {% else %}
+                <h3>Langue :</h3>
+            {% endif %}
+        </div>
+        <div class="col-5">
+            <ul class="nav justify-content-center">
+                <li class="nav-item">
+                    <a class="nav-link active" href="{{ path('click') }}"><img src="../images/fr.png" alt="fr">
+                </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('clickEng') }}"><img src="../images/us.png" alt="us"></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    {% if en %}
+        <h1> Greeting and Welcome ! </h1>
+        <h3> You wanna play a game ? </h3>
+    {% else %}
+        <h1> Salutations et bienvenue ! </h1>
+        <h3> Tu veux jouer à un jeu ? </h3>
+    {% endif %}
     
     {% if users|length > 0 %}   
         <div id="podium">
@@ -30,20 +55,36 @@
     {% endif %}
 
     <div class="row" style="justify-content: center;">
-        <p id="clics">Clics: <span id="nbclique"></span>🖱️</p>
+        {% if not(en) %}
+            <p id="clics">Clics: <span id="nbclique"></span>🖱️</p>
+        {% else %}
+            <p id="clics">Clicks: <span id="nbclique"></span>🖱️</p>
+        {% endif %}
     </div>
     <div class="row">
-        <button id="reset" class="btn btn.secondary">reset 🔄</button>
+        {% if not(en) %}
+            <button id="reset" class="btn btn.secondary">Recommencer🔄</button>
+        {% else %}
+            <button id="reset" class="btn btn.secondary">Reset🔄</button>
+        {% endif %}
     </div>
     <div class="row">
-        <button id="clique" class="btn primary">CLIQUE</button>
+        {% if not(en) %}
+            <button id="clique" class="btn primary">CLIQUE !</button>
+        {% else %}
+            <button id="clique" class="btn primary">CLICK !</button>
+        {% endif %}
     </div>
 
     <h3><span id="time"></span>⏱️</h3>
     <hr>
 
     <div class="row" style="justify-content: center;">
-        <p>Entre ton pseudo pour impressionner tes amis.</p>
+        {% if not(en) %}
+            <p>Entre ton pseudo pour impressionner tes amis.</p>
+        {% else %}
+            <p>Enter your nickname to impress your friends.</p>
+        {% endif %}
     </div>
     <div class="row">
         {{form_start(form)}}
@@ -55,15 +96,24 @@
     <hr>
 
     <div class="row" style="justify-content: center;">
-        <p>Voici le classement des 10 meilleurs joueurs !</p>
+        {% if not(en) %}
+            <p>Voici le classement des 10 meilleurs joueurs !</p>
+        {% else %}
+            <p>Here is the ranking of the 10 best players !</p>
+        {% endif %}
     </div>
 
     <table class="table">
         <thead>
           <tr>
             <th scope="col">#</th>
-            <th scope="col">Pseudo</th>
-            <th scope="col">Clis</th>
+            {% if not(en) %}
+                <th scope="col">Pseudo</th>
+                <th scope="col">Clis</th>
+            {% else %}
+                <th scope="col">Nickname</th>
+                <th scope="col">Clicks</th>
+            {% endif %}
           </tr>
         </thead>
         <tbody>
