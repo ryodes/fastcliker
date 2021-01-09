@@ -33,18 +33,18 @@
         <div id="podium">
             <div id="premier" class="row">
                 {% if users[0] is defined %}
-                    <p><span class="reward">🥇</span><br> {{users[0].name}} </p>
+                    <p><span class="reward">🥇</span><br> <span class="name">{{users[0].name}}</span> </p>
                 {% endif %}
             </div>
             <div class="row">
                 <div id="deuxième" class="col">
                     {% if users[1] is defined %}
-                        <p> <span class="reward">🥈</span><br> {{users[1].name}} </p>
+                        <p> <span class="reward">🥈</span><br> <span class="name">{{users[1].name}}</span> </p>
                     {% endif %}    
                 </div>
                 <div id="troisième" class="col">
                     {% if users[2] is defined %}
-                        <p><span class="reward">🥉</span><br> {{users[2].name}} </p>
+                        <p><span class="reward">🥉</span><br> <span class="name">{{users[2].name}}</span> </p>
                     {% endif %}
                 </div>
                 <col>
