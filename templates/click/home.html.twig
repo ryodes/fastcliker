@@ -110,9 +110,13 @@
             {% if not(en) %}
                 <th scope="col">Pseudo</th>
                 <th scope="col">Clis</th>
+                {% if admin %}
+                    <th></th>
+                {% endif %}
             {% else %}
                 <th scope="col">Nickname</th>
                 <th scope="col">Clicks</th>
+                <th></th>
             {% endif %}
           </tr>
         </thead>
@@ -122,6 +126,9 @@
                     <th scope="row">{{i+1}}</th>
                     <td>{{users[i].name}}</td>
                     <td>{{users[i].clics}}</td>
+                    {% if admin %}
+                        <td><a type="button" href="{{path('Deleteadmin', {'id':users[i].id})}}" class="btn btn-danger">X</a></td>
+                    {% endif %}
                 </tr>
             {% endfor %}
         </tbody>

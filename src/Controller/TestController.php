@@ -43,6 +43,7 @@ class TestController extends AbstractController
             'form' => $form->createView(),
             'users' => $users,
             'en' => False,
+            'admin' => False
         ]);
     }
 
@@ -76,6 +77,30 @@ class TestController extends AbstractController
             'form' => $form->createView(),
             'users' => $users,
             'en' => True,
+            'admin' => False,
         ]);
+    }
+
+    /**
+     * @Route("/admin789456123", name="admin");
+     * @Route("/admin789456123/{id}", name="Deleteadmin");
+     */
+    public function admin(User $user=null, UserRepository $userRepository, EntityManagerInterface $em) {
+
+        $form = $this->createForm(ClickTypeFormType::class,$user);
+        
+        if ($user == null) {
+                $users = $userRepository->findByClicsOrdyByDESC();
+                return $this->render('click/home.html.twig', [
+                'form' => $form->createView(),
+                'users' => $users,
+                'en' => False,
+                'admin' => True,
+            ]);
+        } else {
+            $em->remove($user);
+            $em->flush();
+            return $this->redirectToRoute('admin');
+        }
     }
 }
